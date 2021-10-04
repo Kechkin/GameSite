@@ -1,0 +1,61 @@
+
+{% extends 'base/header.html'%}
+{% block detail%}
+
+<div class="card" style="width: 18rem;">
+      <img src="{{game.image.url}}" class="card-img-top" alt="...">
+      <div class="card-body">
+
+        <h5 class="card-title">{{game.title}}</h5>
+        <p class="card-text">{{game.description}}</p>
+
+      </div>
+          <h4>Скриншоты из игры</h4>
+          <div class="card" style="width: 18rem;">
+            {% for item in game.gameshorts_set.all %}
+                <img src="{{item.image.url}}" class="card-img-top" alt="...">
+            {%endfor%}
+          <div class="card-body">
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Год Выпуска {{game.year}}</li>
+        <li class="list-group-item">Страна {{game.country}}</li>
+
+          {% for com in game.company.all%}
+            <li class="list-group-item">Разработчики <a href="/company/{{com.slug}}/">{{com.name}}</a></li>
+          {%endfor%}
+
+          {% for genre in game.genres.all%}
+            <li class="list-group-item">Жанр {{genre.name}}</li>
+          {%endfor%}
+
+          {% for person in game.person.all%}
+            <li class="list-group-item">Главный персонаж <a href="/person/{{person.slug}}/">{{person.name}}</a></li>
+          {%endfor%}
+
+
+      </ul>
+        </div>
+              <h4>Оставить отзыв</h4>
+              <form action="/review/{{game.slug}}/" method="post">
+                      {% csrf_token %}
+                      <label for="exampleFormControlInput1" class="form-label">Никнейм</label>
+                      <input type="text" name="user">
+                  <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Почта</label>
+                      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleFormControlTextarea1" class="form-label">Оставить отызв</label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
+                    </div>
+                <input type="submit" value="Отправить">
+            </form>
+              <br>
+              <h3>Все комментарии ({{comments.count}})</h3>
+              {%for comment in comments%}
+                <h5>{{comment.user}}</h5>
+                <p>{{comment.text}}</p>
+              {%endfor%}
+        <a class="btn btn-primary" href="/" role="button">На главную</a>
+  {% endblock %}

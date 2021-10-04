@@ -1,0 +1,16 @@
+{% extends 'base/header.html'%}
+  {% block company%}
+
+      <div class="card" style="width: 18rem;">
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{company.name}}</li>
+        <li class="list-group-item">{{company.description}}</li>
+          <h5>Игры</h5>
+          {%for game in company.game_set.all%}
+            <a href="/{{game.slug}}">{{game}}</a>
+          {%endfor%}
+      </ul>
+        </div>
+      <a class="btn btn-primary" href="/" role="button">На главную</a>
+{% endblock %}

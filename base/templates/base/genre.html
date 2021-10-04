@@ -1,0 +1,15 @@
+{% extends 'base/header.html'%}
+  {% block title%}
+    <p>Всего игр ({{games.count}})</p>
+    <div class="card" style="width: 18rem;">
+      {%for game in games%}
+        <img src="{{game.image.url}}" class="card-img-top" alt="...">
+         <div class="card-body">
+            <h5 class="card-title">{{game.title}}</h5>
+            <p class="card-text">{{game.description}}</p>
+            <a href="{{game.get_absolute_url}}" class="btn btn-primary">Подробнее</a>
+        </div>
+      {%endfor%}
+  {% endblock %}
+
+

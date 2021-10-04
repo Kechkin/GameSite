@@ -1,0 +1,12 @@
+{% extends 'base/header.html'%}
+{% block person%}
+      <div class="card" style="width: 18rem;">
+        <img src="{{person.image.url}}" class="card-img-top" alt="...">
+         <div class="card-body">
+            <h5 class="card-title">{{person.name}}</h5>
+             <p class="card-text">Возраст:{{person.age}} лет </p>
+            <p class="card-text">Биография: {{person.description}}}</p>
+        </div>
+    </div>
+    <a class="btn btn-primary" href="/" role="button">На главную</a>
+{% endblock %}
